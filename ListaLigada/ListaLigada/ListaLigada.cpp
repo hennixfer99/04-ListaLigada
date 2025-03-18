@@ -145,53 +145,66 @@ void inserirElemento()
 
 void excluirElemento()
 {
-	int valor;
+	int numero;
 	cout << "Digite um número: \n";
-	cin >> valor;
-	pos = posicaoElemento(valor);
+	cin >> numero;
+	NO* aux = posicaoElemento(numero);
+	NO* deleta;
 
-	if(pos == -1){
+	if (aux == NULL) {
 		cout << "ELEMENTO NAO ENCONTRADO";
 		return;
 	}
 
-	if(nElementos == 0){
-		cout << "LISTA VAZIA";
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
 		return;
 	}
 
-	for(let i = pos; i < nElementos -1; i++){
-		lista[i] == lista[i++];	
+	while (aux != NULL) {
+		if(aux->valor == numero){
+			deleta = aux;
+			break;
+		}
+		if (aux->prox->valor == numero)
+		{
+			aux = aux->prox->prox;
+			deleta = aux->prox;
+			break;
+		}
+		aux = aux->prox;
 	}
 
-	nElementos = nElementos - 1;
+	free(deleta);
 
 	exibirElementos();
 }
 
 void buscarElemento()
 {
-	int valor;
+	int numero;
 	cout << "Digite um número: \n";
-	cin >> valor;
-	pos = posicaoElemento(valor);
+	cin >> numero;
+	NO* aux = posicaoElemento(numero);
 
-	if(pos == NULL){
-		cout << "ELEMENTO NAO ENCONTRADO";
+	if (aux == NULL) {
+		cout << "ELEMENTO NAO ENCONTRADO \n";
 		return;
 	}
 
-	if(nElementos == 0){
-		cout << "LISTA VAZIA";
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
 		return;
 	}
 
-	for(let i = 0; i < nElementos; i++){
-		if(pos == i){
-			cout << "ENCONTRADO:" << lista[i];
-			return;
-		}	
-	}
+	while (aux != NULL) {
+		if (aux->valor == numero)
+		{
+			cout << "ELEMENTO ENCONTRADO \n";
+			break;
+		}
+		aux = aux->prox;
+		}
 }
 
 
