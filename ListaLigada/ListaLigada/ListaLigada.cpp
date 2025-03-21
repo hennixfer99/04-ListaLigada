@@ -146,36 +146,32 @@ void inserirElemento()
 void excluirElemento()
 {
 	int numero;
-	cout << "Digite um número: \n";
-	cin >> numero;
-	NO* aux = posicaoElemento(numero);
-	NO* deleta;
-
-	if (aux == NULL) {
-		cout << "ELEMENTO NAO ENCONTRADO";
-		return;
-	}
-
+	
 	if (primeiro == NULL) {
 		cout << "Lista vazia \n";
 		return;
 	}
 
-	while (aux != NULL) {
-		if(aux->valor == numero){
-			deleta = aux;
-			break;
-		}
-		if (aux->prox->valor == numero)
-		{
-			aux = aux->prox->prox;
-			deleta = aux->prox;
-			break;
-		}
-		aux = aux->prox;
+	cout << "Digite um número: \n";
+	cin >> numero;
+
+	NO* aux = primeiro;
+	NO* anterior = NULL;
+	
+	while (aux != NULL && aux->valor != numero) {
+			anterior = aux;
+			aux = aux->prox;
 	}
 
-	free(deleta);
+	if(anterior == NULL){
+		primeiro = aux->prox;
+	}else{
+		anterior->prox = aux->prox;
+	}
+
+	free(aux);
+	
+	cout << "Elemento excluido com sucesso" << endl;
 
 	exibirElementos();
 }
@@ -183,7 +179,7 @@ void excluirElemento()
 void buscarElemento()
 {
 	int numero;
-	cout << "Digite um número: \n";
+	cout << "Digite um número que gostaria de buscar: \n";
 	cin >> numero;
 	NO* aux = posicaoElemento(numero);
 
