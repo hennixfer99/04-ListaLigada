@@ -169,15 +169,27 @@ void excluirElemento()
 		anterior->prox = aux->prox;
 	}
 
-	free(aux);
+	if(aux->valor == numero){
 	
-	cout << "Elemento excluido com sucesso" << endl;
+		free(aux);
+	
+		cout << "Elemento excluido com sucesso" << endl;
+	
+		exibirElementos();
+	}else{
+		cout << "Elemento nao encontrado" << endl;
+	}
+	
 
-	exibirElementos();
-}
+}	
 
 void buscarElemento()
 {
+	if (primeiro == NULL) {
+		cout << "Lista vazia \n";
+		return;
+	}
+
 	int numero;
 	cout << "Digite um número que gostaria de buscar: \n";
 	cin >> numero;
@@ -188,10 +200,6 @@ void buscarElemento()
 		return;
 	}
 
-	if (primeiro == NULL) {
-		cout << "Lista vazia \n";
-		return;
-	}
 
 	while (aux != NULL) {
 		if (aux->valor == numero)
